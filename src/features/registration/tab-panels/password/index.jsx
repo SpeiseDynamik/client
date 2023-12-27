@@ -1,35 +1,25 @@
 import { useForm, Controller } from 'react-hook-form';
+import { checkPassword } from '@/utils/validators';
 import { TextField, Button, Stack } from '@/components/base';
 
-function checkPassword(password) {
-  // Check if the password has at least 8 characters
-  if (password.length < 8) {
-    return 'Password must have at least 8 characters';
-  }
-
-  // Check if the password contains at least one number
-  if (!/\d/.test(password)) {
-    return 'Password must contain at least one number';
-  }
-
-  // Check if the password contains at least one lowercase letter
-  if (!/[a-z]/.test(password)) {
-    return 'Password contains at least one lowercase letter';
-  }
-
-  // Check if the password contains at least one uppercase letter
-  if (!/[A-Z]/.test(password)) {
-    return 'Password must contain at least one uppercase letter';
-  }
-
-  // Check if the password contains at least one special character
-  if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password)) {
-    return 'Password must contain at least one special character';
-  }
-
-  // If all conditions are met, the password is valid
-  return true;
+function getInput(label) {
+  return function Input({ field, fieldState: { error } }) {
+    return (
+      <TextField
+        size='small'
+        label={label}
+        fullWidth
+        error={!!error}
+        helperText={error ? error.message : null}
+        {...field}
+      />
+    );
+  };
 }
+
+const EmailInput = getInput('E-Mail');
+const PasswordInput = getInput('Password');
+const ReapetPasswordInput = getInput('Repeat password');
 
 function PasswordTabPanel(props) {
   const { initialValues, onNext } = props;
@@ -45,33 +35,11 @@ function PasswordTabPanel(props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4}>
-        <Controller
-          name='email'
-          control={control}
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              size='small'
-              label='E-Mail'
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-              {...field}
-            />
-          )}
-        />
+        <Controller name='email' control={control} render={EmailInput} />
         <Controller
           name='password'
           control={control}
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              size='small'
-              label='Password'
-              fullWidth
-              error={!!error}
-              helperText={error ? error.message : null}
-              {...field}
-            />
-          )}
+          render={PasswordInput}
           rules={{
             validate: (password) => {
               return checkPassword(password);
@@ -80,19 +48,8 @@ function PasswordTabPanel(props) {
         />
         <Controller
           name='reapetPassword'
-          render={({ field, fieldState: { error } }) => {
-            return (
-              <TextField
-                size='small'
-                label='Repeat password'
-                fullWidth
-                error={!!error}
-                helperText={error ? error.message : null}
-                {...field}
-              />
-            );
-          }}
           control={control}
+          render={ReapetPasswordInput}
           rules={{
             validate: (reapetPassword, { password }) => {
               return reapetPassword === password
