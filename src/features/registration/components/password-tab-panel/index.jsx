@@ -9,8 +9,8 @@ const PasswordInput = getTextField({ label: 'Password' });
 const ReapetPasswordInput = getTextField({ label: 'Repeat password' });
 
 function PasswordTabPanel(props) {
-  const { initialValues, onNext, ...layoutProps } = props;
-  const { control, handleSubmit } = useRegForm(initialValues, onNext);
+  const { initialState, onSubmit, ...layoutProps } = props;
+  const { control, handleSubmit } = useRegForm(initialState, onSubmit);
 
   return (
     <Layout {...layoutProps} onSubmit={handleSubmit}>

@@ -36,14 +36,15 @@ const tabs = [
 
 function RegistrationPage() {
   const [tabIdx, setTabIdx] = useState(0);
-  const handleTabChange = (_, idx) => setTabIdx(idx);
+  const tabId = tabs[tabIdx].id;
   const { tabsState, setTabState } = useTabsState(tabs);
   const { mutate, isPending, error } = useMutation({
     mutationFn: validateRegistration,
     onSuccess: () => setTabIdx((idx) => idx + 1),
   });
 
-  const handleNextClick = (data) => {
+  const handleTabChange = (_, idx) => setTabIdx(idx);
+  const handleSubmit = (data) => {
     mutate(data);
     setTabState(data);
   };
@@ -53,11 +54,11 @@ function RegistrationPage() {
       <h1>Registration</h1>
       <Tabs tabs={tabs} tabIdx={tabIdx} onTabChange={handleTabChange} />
       <TabPanel
-        tab={tabs[tabIdx].id}
-        initialValues={tabsState[tabs[tabIdx].id]}
-        isLoading={isPending}
-        errorMessage={error?.message}
-        onNext={handleNextClick}
+        tabId={tabId}
+        initialState={tabsState[tabId]}
+        isPending={isPending}
+        error={error}
+        onSubmit={handleSubmit}
       />
     </div>
   );

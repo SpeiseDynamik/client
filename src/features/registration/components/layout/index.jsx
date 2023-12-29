@@ -1,16 +1,16 @@
 import { Alert, LoadingButton } from '@/components/base';
 
 function Layout(props) {
-  const { children, errorMessage, isLoading, onSubmit } = props;
+  const { children, error, isPending, onSubmit } = props;
   return (
     <form onSubmit={onSubmit}>
-      {errorMessage && (
+      {error && (
         <Alert severity='error' variant='filled' onClose={() => {}}>
-          {errorMessage}
+          {error.message}
         </Alert>
       )}
       {children}
-      <LoadingButton loading={isLoading} variant='contained' type='submit'>
+      <LoadingButton loading={isPending} variant='contained' type='submit'>
         Next
       </LoadingButton>
     </form>

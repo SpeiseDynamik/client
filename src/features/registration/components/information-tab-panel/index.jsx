@@ -11,8 +11,8 @@ const BusinessEmailInput = getTextField({ label: 'Business E-Mail' });
 const DescriptionInput = getTextField({ label: 'Restaurant Description' });
 
 function InformationTabPanel(props) {
-  const { initialValues, onNext, ...layoutProps } = props;
-  const { control, handleSubmit } = useRegForm(initialValues, onNext);
+  const { initialState, onSubmit, ...layoutProps } = props;
+  const { control, handleSubmit } = useRegForm(initialState, onSubmit);
   return (
     <Layout {...layoutProps} onSubmit={handleSubmit}>
       <FieldController

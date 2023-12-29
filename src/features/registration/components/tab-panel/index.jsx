@@ -6,16 +6,16 @@ const Components = {
   informationTab: InformationTabPanel,
 };
 
-function TabPanel({ tab, onNext, ...props }) {
-  const handleNext = (data) => {
-    onNext({
+function TabPanel({ tabId, onSubmit, ...props }) {
+  const handleSubmit = (data) => {
+    onSubmit({
       data,
-      tab,
+      tab: tabId,
     });
   };
-  const Component = Components[tab];
+  const Component = Components[tabId];
 
-  return <Component {...props} onNext={handleNext} />;
+  return <Component {...props} onSubmit={handleSubmit} />;
 }
 
 export default TabPanel;
