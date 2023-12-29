@@ -1,18 +1,29 @@
+import { setTimeout as sleep } from 'node:timers/promises';
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
+
 const fastify = Fastify({
   logger: true,
 });
 
-// Declare a route
-fastify.get('/', async function handler(request, reply) {
-  return { hello: 'world' };
+fastify.get('/ping', (_, reply) => {
+  reply.send('pong');
 });
 
-// Run the server!
+fastify.post('/api/registration/validate', async function handler(req, reply) {
+  await sleep(1000);
+  if (req.body.data.email === 'busy.email@example.com') {
+    reply.code(400).send({ message: 'Email is busy' });
+  } else {
+    reply.code(200).send({ status: 'ok' });
+  }
+});
+
 try {
-  const address = await fastify.listen({ port: 3000, host: '127.0.0.1' });
+  await fastify.register(cors, { origin: true });
+  const address = await fastify.listen({ port: 4000, host: '127.0.0.1' });
   console.log(`Server listening on ${address}`);
 } catch (err) {
-  fastify.log.error(err);
+  console.error(err);
   process.exit(1);
 }
