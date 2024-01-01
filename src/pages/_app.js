@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import ThemeProvider from '@/components/theme-provider';
 // import '@/styles/globals.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -18,7 +19,9 @@ export default function App(props) {
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
         <AppCacheProvider {...props}>
-          <Component {...pageProps} />
+          <ThemeProvider>
+            <Component {...pageProps} />
+          </ThemeProvider>
         </AppCacheProvider>
       </HydrationBoundary>
     </QueryClientProvider>

@@ -1,0 +1,7 @@
+@use './vars' as *;
+
+ 
+:export {
+  colorPrimaryMain: $color-primary-main;
+  colorPrimaryDark: $color-primary-dark;
+}
