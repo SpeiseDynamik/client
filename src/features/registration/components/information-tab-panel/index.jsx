@@ -3,12 +3,18 @@ import { FieldController } from '@/components/form';
 import Layout from '@/features/registration/components/layout';
 import getTextField from '@/features/registration/components/get-controller-text-field';
 
-const RestaurantNameInput = getTextField({ label: 'Restaurant Name' });
+const RestaurantNameInput = getTextField({
+  label: 'Restaurant Name',
+  required: true,
+});
 const FirstNameInput = getTextField({ label: 'Your Name' });
 const LastNameInput = getTextField({ label: 'Your Surname' });
 const PhoneInput = getTextField({ label: 'Personal Phone' });
 const BusinessEmailInput = getTextField({ label: 'Business E-Mail' });
-const DescriptionInput = getTextField({ label: 'Restaurant Description' });
+const DescriptionInput = getTextField({
+  label: 'Restaurant Description',
+  multiline: true,
+});
 
 function InformationTabPanel(props) {
   const { initialState, onSubmit, ...layoutProps } = props;
@@ -19,6 +25,7 @@ function InformationTabPanel(props) {
         name='restaurantName'
         control={control}
         render={RestaurantNameInput}
+        rules={{ required: true }}
       />
       <FieldController
         name='firstName'
