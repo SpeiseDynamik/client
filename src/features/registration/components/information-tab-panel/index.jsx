@@ -1,7 +1,7 @@
 import { useRegForm } from '@/features/registration/hooks';
 import { FieldController } from '@/components/form';
 import Layout from '@/features/registration/components/layout';
-import getTextField from '@/features/registration/components/getControllerTextField';
+import getTextField from '@/features/registration/components/get-controller-text-field';
 
 const RestaurantNameInput = getTextField({ label: 'Restaurant Name' });
 const FirstNameInput = getTextField({ label: 'Your Name' });
