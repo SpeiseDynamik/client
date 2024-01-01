@@ -29,9 +29,16 @@ const tabs = [
     },
   },
   {
-    id: 'otherTab',
-    title: 'Other',
-    state: {},
+    id: 'addressTab',
+    title: 'Address',
+    state: {
+      country: '',
+      fullName: '',
+      phone: '',
+      address: '',
+      zipCode: '',
+      city: '',
+    },
   },
 ];
 
