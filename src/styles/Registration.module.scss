@@ -1,0 +1,20 @@
+@use './vars' as *;
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+.leftPart {
+  background-color: $color-background;
+  padding: 2rem 6rem;
+  position: relative;
+}
+
+.rightPart {
+  background-color: white;
+  padding: 2rem;
+}

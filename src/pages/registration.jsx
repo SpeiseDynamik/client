@@ -4,6 +4,7 @@ import { useTabsState } from '@/features/registration/hooks';
 import { validateRegistration } from '@/api';
 import TabPanel from '@/features/registration/components/tab-panel';
 import Tabs from '@/features/registration/components/tabs';
+import styles from '@/styles/Registration.module.scss';
 
 const tabs = [
   {
@@ -50,16 +51,18 @@ function RegistrationPage() {
   };
 
   return (
-    <div>
-      <h1>Registration</h1>
-      <Tabs tabs={tabs} tabIdx={tabIdx} onTabChange={handleTabChange} />
-      <TabPanel
-        tabId={tabId}
-        initialState={tabsState[tabId]}
-        isPending={isPending}
-        error={error}
-        onSubmit={handleSubmit}
-      />
+    <div className={styles.container}>
+      <div className={styles.leftPart}>
+        <Tabs tabs={tabs} tabIdx={tabIdx} onTabChange={handleTabChange} />
+        <TabPanel
+          tabId={tabId}
+          initialState={tabsState[tabId]}
+          isPending={isPending}
+          error={error}
+          onSubmit={handleSubmit}
+        />
+      </div>
+      <div className={styles.rightPart}>V</div>
     </div>
   );
 }
