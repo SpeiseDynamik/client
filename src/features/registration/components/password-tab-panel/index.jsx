@@ -4,11 +4,16 @@ import { FieldController } from '@/components/form';
 import Layout from '@/features/registration/components/layout';
 import getTextField from '@/features/registration/components/get-controller-text-field';
 
-const EmailInput = getTextField({ label: 'Email' });
-const PasswordInput = getTextField({ label: 'Password', type: 'password' });
+const EmailInput = getTextField({ label: 'Email', required: true });
+const PasswordInput = getTextField({
+  label: 'Password',
+  type: 'password',
+  required: true,
+});
 const ReapetPasswordInput = getTextField({
   label: 'Repeat password',
   type: 'password',
+  required: true,
 });
 
 function PasswordTabPanel(props) {
