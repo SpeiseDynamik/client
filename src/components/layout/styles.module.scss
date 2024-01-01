@@ -1,0 +1,26 @@
+@use '../../styles/vars' as vars;
+
+.container {
+  margin: 0 auto;
+  max-width: 100%;
+
+  @media (min-width: vars.$bp-sm) {
+    max-width: vars.$bp-sm;
+  }
+
+  @media (min-width: vars.$bp-md) {
+    max-width: vars.$bp-md;
+  }
+
+  @media (min-width: vars.$bp-lg) {
+    max-width: vars.$bp-lg;
+  }
+
+  @media (min-width: vars.$bp-xl) {
+    max-width: vars.$bp-xl;
+  }
+
+  @media (min-width: vars.$bp-xxl) {
+    max-width: vars.$bp-xxl;
+  }
+}
